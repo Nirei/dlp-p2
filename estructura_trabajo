@@ -1,0 +1,28 @@
+1. Introducción:
+	- Qué es la programación declarativa. *
+	- Qué es la programación lógica.
+		- Usos.
+	- Lógicas alternativas.
+	- Prolog y alternativas
+
+2. Prolog
+	- Prolog
+		- Cláusulas de Horn
+	- Extensiones de Prolog
+
+3. Alternativas a Prolog
+	- Maude System programming language (570,000) [ REESCRITURA ]
+	- Datalog programming language (362,000) [ CONSULTAS ]
+	- Clingo programming language (7,300) [ ASP ]
+
+	- Otros (para mencionar)
+		- Gödell programming language (575,000)
+		- Mercury programming language (1,830,000)
+		- F-logic programming language (896,000)
+		- ALF programming language (87,000)
+		- CycL programming language (19,500)
+		- Twelf programming language (9,640)
+
+4. Adaptación de lenguajes de programación lógica a lógicas alternativas
+	- Lógicas no monotónicas
+	- Lógicas temporales

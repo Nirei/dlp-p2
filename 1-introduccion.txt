@@ -1,0 +1,15 @@
+Introducción
+
+El presente trabajo tratará de ofrecer una aproximación al paradigma de la programación lógica y los diferentes lenguajes de programación que se encuadran en él, dando una perspectiva de las particularidades de este tipo de lenguajes respecto a los de otros paradigmas y ofreciendo una visión comparativa de las características propias de cada uno de los lenguajes estudiados.
+
+La programación lógica, en su forma actual, surje alrededor de la década de los 70 en el marco del debate entre representaciones procedurales y declarativas del conocimiento en Inteligencia Artificial. La programación lógica se basa en la lógica formal.
+
+Un programa en este paradigma se expresa como una serie de hechos y reglas que representan las relaciones entre ellos. De este modo, al escribir un algoritmo en estos lenguajes, no es necesario expresar el componente de control. El flujo del programa, el orden en que se ejecutan las instrucciones, se decidirá de forma automática y por tanto, la programación lógica es un subconjunto del paradigma de la programación declarativa.
+
+La expresión de programas como una serie de cláusulas lógicas encuentra su utilidad fundamental en varios dominios en los que la lógica se presenta como la expresión natural de los problemas a abordar. Algunos de estos dominios son el razonamiento automático, tanto para la demostración automática de teoremas y la verificación formal como para la construcción de sistemas expertos; o el reconocimiento del lenguaje natural.
+
+La programación lógica abarca varios tipos de lógicas, útiles en diferentes tipos de problemas. Además de la lógica proposicional y de primer orden, existen implementaciones de lógica difusa y lógica modal, como la temporal, para trabajar con la ambigüedad semántica propia de los lenguajes humanos o lógicas no monotónicas, para razonar bajo incertidumbre o información incompleta.
+
+Los lenguajes elegidos en este trabajo para ejemplificar los diferentes usos de la programación lógica serán Prolog, para el caso más general, Datalog, como ejemplo de un lenguaje orientado a la consulta de bases de conocimientos, Maude system como ejemplo de sistema de reescritura y Clingo para el enfoque de programación de conjunto-respuesta (answer set programming).
+
+El resto del trabajo está estructurado como sigue. En la sección [REF 2] introducimos el lenguaje Prolog, diseccionando su funcionamiento y características y comentando por encima algunas extensiones populares que añaden diferentes tipos de lógica. Los distintos tipos de lógica se comentan con más detalle en la sección [REF 4]. La sección [REF 3] comenta varios lenguajes de programación lógica orientados a los distintos dominios en los que esta es adecuada. A continuación, se presentan varios tipos de lógicas con sus correspondientes dominios de aplicación en la sección [REF 4], donde se reseña la manera en la que algunos lenguajes de programación lógica han sido adaptados a estas lógicas alternativas.
