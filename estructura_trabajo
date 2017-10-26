@@ -5,12 +5,16 @@
 	- Lógicas alternativas.
 	- Prolog y alternativas
 
+3. Lógicas alternativas
+	- Lógicas no monotónicas
+	- Lógicas temporales
+
 2. Prolog
 	- Prolog
 		- Cláusulas de Horn
 	- Extensiones de Prolog
 
-3. Alternativas a Prolog
+4. Alternativas a Prolog
 	- Maude System programming language (570,000) [ REESCRITURA ]
 	- Datalog programming language (362,000) [ CONSULTAS ]
 	- Clingo programming language (7,300) [ ASP ]
@@ -22,7 +26,3 @@
 		- ALF programming language (87,000)
 		- CycL programming language (19,500)
 		- Twelf programming language (9,640)
-
-4. Adaptación de lenguajes de programación lógica a lógicas alternativas
-	- Lógicas no monotónicas
-	- Lógicas temporales
