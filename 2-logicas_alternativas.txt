@@ -1,0 +1,21 @@
+1. Lógica proposicional 
+
+	La lógica proposicional, o lógica de orden cero, es un sistema formal en el que sus elementos más simples son variables proposicionales cuyo "significado" no es importante, solo interesa su valor de verdad («verdadero» o «falso»).
+
+	Las preposiciones están conectadas mediante conectivas lógicas que son tratadas como funciones de verdad; es decir, como funciones que toman conjuntos de valores de verdad y devuelven, también, valores de verdad. Por ejemplo, la conectiva «y» es una función que devolverá «verdadero» cuando tome dos valores de verdad verdaderos y, en el resto de casos, devolverá «falso». La diferencia entre los distintos conectores lógicos es el valor de verdad devuelto según las combinaciones de valores que recibe.
+
+2. Lógica de predicados
+
+	La lógica de predicados, o lógica de primer orden, aumenta la capacidad de expresión de la lógica proposicional. Un predicado es una expresión lingüística que puede conectarse con una o varias expresiones para formar una oración, pero para la lógica de predicados es una función que recibe expresiones como argumentos. Ejemplos:
+«Claire es una gata» ----> Gata(Claire)
+«Juan juega con Lorena» -> Juega(Juan,Lorena)
+
+	Existen constantes de individuos que hacen referencia a entidades determinadas y variables de individuo que no tienen referencias determinadas; por tanto, su referencia varía con el contexto. Ejemplo: Rico(Juan), Rico(x). Los cuantificadores son operadores sobre conjuntos de individuos que indican que una condición se verifica, por ejemplo: los cuantificadores universales y existenciales. Los predicados también pueden conectarse con las conectivas de la lógica proposicional.
+
+3. Lógica no monotónica
+
+	Los sistemas lógicos tradicionales tienen una relación de consecuencia monotónica; es decir, las nuevas fórmulas añadidas a una teoría no reducen el número de consecuencias (lo conocido no se ve modificado por el nuevo conocimiento). Esto impide trabajar con razonamientos por incertidumbre, probabilidad o la contradicción de creencias. La lógica no monotónica permite trabajar con estos criterios, ya que el nuevo conocimiento puede contradecir al viejo y, por tanto, reducirlo. Esto permite suponer hechos y modifcarlos cuando se tiene el conocimiento.
+
+4. Lógica modal
+
+	La lógica modal añade las expresiones «es necesario que» y «es posible que» a la lógica de predicados. Estas expresiones califican la verdad de los juicios. Extensiones de la lógica modal añaden nuevas expresiones para calificar, como la lógica temporal, en la que el valor de la verdad de las expresiones es dependiente del tiempo; o la deóntica, que agrega la lógica de las normas.
