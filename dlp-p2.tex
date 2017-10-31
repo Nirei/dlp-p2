@@ -59,11 +59,21 @@
 \usepackage{datetime}
 \usepackage{enumitem}
 \usepackage{textcomp}
+\usepackage{relsize}
+
+\usepackage[labelfont=bf]{caption}
+\setcapwidth[c]{.8\textwidth}
+\setcapindent{0pt}
+\addtokomafont{caption}{\centering}
+
+\usepackage{listings}
+\usepackage{qtree}
+\usepackage{hyperref}
 
 \newcommand{\vctilde}{\raisebox{0.5ex}{\texttildelow}}
 
 \title{Deseño de Linguaxes de Programación}
-\subtitle{Work report for languages C, Java, Ruby and OCaml}
+\subtitle{Report on logic programming}
 \author{Rodríguez Arias, Alejandro\\
 	\texttt{alejandro.rodriguez.arias@udc.es}
 	\and Bouzas Quiroga, Jacobo\\
@@ -81,10 +91,10 @@
 \begin{document}
 \maketitle
 \clearpage
-%\tableofcontents
+\tableofcontents
 \clearpage
 
-\section{Introduction}
+\section{Introducción}
 \label{sec:intro}
 
 El presente trabajo tratará de ofrecer una aproximación al paradigma de la programación lógica y los diferentes lenguajes de programación que se encuadran en él, dando una perspectiva de las particularidades de este tipo de lenguajes respecto a los de otros paradigmas y ofreciendo una visión comparativa de las características propias de cada uno de los lenguajes estudiados.
@@ -107,13 +117,64 @@ lol
 
 \section{Prolog}
 \label{sec:prolog}
-lol
+
+El lenguaje de programación lógica más destacable es Prolog. Prolog fue creado por Alain Colmerauer y Phillippe Roussel a principios de los 70. Se trata de un lenguaje de programación lógica de propósito general cuya finalidad original era realizar procesamiento de lenguaje natural para el idioma francés.
+
+\subsection{Cláusulas de Horn}
+\label{subsec:horn}
+El Prolog puro estaba originalmente restringido al uso de cierto tipo de fórmulas lógicas conocidas como cláusulas de Horn, esto es, implicaciones lógicas con un único consecuente.
+
+\begin{figure}[h]
+\label{fig:horn}
+{\Large{\[ ( p \land q \land r ) \to s \]}}%
+\caption{Cláusula de Horn en forma de implicación lógica. A la derecha encontramos una única variable.}
+\end{figure}
+
+La particularidad de estas cláusulas es que expresan una relación de causalidad entre los antecedentes y el consecuente, permitiendo demostrar la veracidad lógica del consecuente si se verifica cada uno de los antecedentes. En el ejemplo de la figura~\ref{fig:horn} $ s $ se cumple si lo hacen $ p $, $ q $ y $r $.
+
+Programar en Prolog implica definir en primer lugar una base de hechos, que pueden ser átomos o proposiciones sobre estos, y reglas, las mencionadas cláusulas de Horn. Un átomo es un nombre definido en Prolog que no referencia ningún otro valor y sin significado propio, por ejemplo carlos, 'Pato' o 'universidade da Coruña'. Un ejemplo de una base de conocimiento se presenta en la figura~\ref{fig:knowledge}.
+
+\begin{figure}[h]
+\label{fig:knowledge}
+\lstset{language=Prolog}
+\begin{lstlisting}[frame=single]
+lol.
+wtf(lol).
+rofl :- lol.
+lmao(X) :- funny(X), wtf(lol).
+\end{lstlisting} 
+\caption{Definición de hechos atómicos, proposiciones y reglas en Prolog.}
+\end{figure}
+
+Una vez definida esta base de conocimiento, es posible plantear cuestiones sobre la misma al intérprete de Prolog. La figura~\ref{xddd} presenta un ejemplo de ejecución de una consulta sobre una base de hechos de Prolog.
+
+\begin{figure}[h]
+\label{fig:xddd}
+\lstset{language=Prolog}
+\begin{lstlisting}[frame=single]
+otra.
+cosa.
+\end{lstlisting} 
+\caption{Blablabla.}
+\end{figure}
+
+
+\subsection{Unificación y backtracking}
+
+La ejecución de código en Prolog se guía por dos mecanismos, la unificación y el backtracking. Mediante la unificación de una cláusula se determinan los objetivos, las condiciones que forman el antecedente. Cada objetivo especifica un conjunto de cláusulas que podrían verificarlo, estas cláusulas se denominan puntos de elección. Si, tras su ejecución, uno de los puntos de elección prueba ser falso, se deshace la ejecución y se selecciona el siguiente punto de elección. Este proceso, denominado backtracking, se repite hasta que una de estas cláusulas resulte ser cierta o todos los puntos de elección resultan falsos.
+
+\subsection{Prolog como lenguaje de programación}
+Prolog provee un sistema de tipos dinámico. Estrictamente hablando, el único tipo considerado en Prolog es el término, que puede representar constantes, variables o valores compuestos, cláusulas incluídas. El estándar de prolog divide las constantes en varios subtipos para restringir el uso de distintas operaciones a los datos correctos, a saber números, que pueden ser de punto flotante o enteros, y átomos, los valores simbólicos introducidos en la sección \ref{subsec:horn}
+
+Prolog trabaja únicamente con dos ``scopes'' posibles. Uno global, el de la base de reglas, accesible desde cualquier punto del programa y desde la línea de comandos del intérprete, y otro local a la cláusula en la que se llama un nombre.
+
+A nivel de estructuras de datos, Prolog introduce listas recursivas, a la manera de Lisp; parejas de elementos y listas asociativas, implementadas con árboles binarios balanceados.
 
 \section{Alternativas a Prolog}
 \label{sec:alt-prolog}
 lolol
 
-\subsection{Maude}
+\subsection{Maude System}
 lol
 
 \subsection{Datalog}
@@ -122,4 +183,6 @@ lol
 \subsection{Clingo}
 lol
 
+\section{Dominios de aplicación}
+lol
 \end{document}

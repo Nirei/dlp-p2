@@ -17,10 +17,13 @@ Una vez definida esta base de conocimiento, es posible plantear cuestiones sobre
 
 [ EJEMPLO TAL Y CUAL ]
 
-\section{Unificación y backtracking}
+\subsection{Unificación y backtracking}
 
 La ejecución de código en Prolog se guía por dos mecanismos, la unificación y el backtracking. Mediante la unificación de una cláusula se determinan los objetivos, las condiciones que forman el antecedente. Cada objetivo especifica un conjunto de cláusulas que podrían verificarlo, estas cláusulas se denominan puntos de elección. Si, tras su ejecución, uno de los puntos de elección prueba ser falso, se deshace la ejecución y se selecciona el siguiente punto de elección. Este proceso, denominado backtracking, se repite hasta que una de estas cláusulas resulte ser cierta o todos los puntos de elección resultan falsos.
 
-\section{Alternativas}
+\subsection{Prolog como lenguaje de programación}
 
-Blablablalternativas.
+
+\subsection{Extensiones de Prolog}
+
+
