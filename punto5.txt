@@ -1,0 +1,8 @@
+﻿Procesamiento de Lenguajes naturales 
+
+	El procesamiento de lenguajes naturales es un campo de las ciencias de la computación, inteligencia artificial y lingüística que estudia las interacciones entre las computadoras y el lenguaje humano. Se ocupa de la formulación e investigación de mecanismos eficaces computacionalmente para la comunicación entre personas y máquinas por medio de lenguajes naturales. Como ejemplo tenemos a "Clarissa": un navegador de procedimientos completamente operativo por voz que permite a los astronautas ser más eficientes con sus manos y ojos y prestar toda la atención a la tarea concreta mientras navegan por el procedimiento usando comandos por voz. Clarissa esta hecho con prolog.
+
+	Los lenguajes lógicos son especialmente útiles para la demostración de teoremas matemáticos o la verificación formal. El autor de Erlang escribió el primer inteérprete para su lenguaje utilizando Prolog.
+
+	En el campo de la inteligencia artificial, Prolog es un lenguaje importante para la elaboración de sistemas expertos. Un sistema experto es un sistema computacional que emula la habilidad de toma de decisiones de un experto humano. Los sistemas expertos están diseñados para resolver problemas complejos mediante razonamiento sobre conocimiento, representado mayormente como reglas if-then y no como reglas convencionales de código. Ejemplos: DealBuilder (constructor automático de documentos legales), Arezzo (para la toma de decisiones clínicas) e InFlow (analizador de redes sociales en búsqueda de terroristas).
+

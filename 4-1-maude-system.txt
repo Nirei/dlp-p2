@@ -1,0 +1,66 @@
+﻿MAUDE SYSTEM
+Maude es un software libre desarrollado por el SRI International: un instituto de investigacion de California
+Compilador: Core Maude
+
+Sintaxis:
+
+1. Identificadores
+	
+	Son cadenas de caracteres usadas para nombrar "modules" y "sorts". Hay varios caracteres especiales, entre ellos el espacio en blanco, que no forman parte de los caracteres disponibles pero pueden ser usados escapándolos con '
+	
+2. Modules:
+
+	Las unidades básicas de especificación y programación son los módulos, que consisten en "sorts" para nombrar los tipos, subsorts y kinds para
+ relacionar estos tipos y los operadores. Hay 2 tipos de módulos: 
+	-Módulo funcional -> Contiene los tipos de datos y las ecuaciones sobre ellos.
+	-Módulo de sistema -> Contienen las reglas de transición entre estados, además de las ecuaciones y tipos de datos.
+	Ejemplo:
+		fmod NUMBERS is
+		...
+		endfm
+ 3. Sorts:
+
+	La forma de declarar un tipo en Maude es usar la palabra clave "sort" seguida de un identificador, un espacio en blanco y un punto. Ejemplos:
+	sort Nat .
+	sort Zero .
+	
+	Se puede utilizar la palabra "sorts" para hacer varias declaraciones en la misma línea. Ejemplo:
+	sorts Nat Zero .
+		
+3.1 Subsort:
+
+	Para declarar subtipos existe la palabra clave "subsort" seguida del subtipo < tipopadre espacio y punto. Ejemplos:
+	subsort Zero < Nat .
+	subsorts NzNat Zero < Nat .
+
+4. Operadores
+
+	Se declaran con la palabra clave "op" seguida de su identificador, dos puntos y una lista de tipos una flecha (->), seguida por los resultados. Opcionalmente pueden tener una declaración de atributo. Ejemplos:
+	op zero : -> Zero .
+	op length : List -> Nat .
+	op _+_: Nat Nat -> Nat
+
+5 Kinds
+	"Kind" es una clase de equivalencia que engloba a los sorts relacionados.
+	//Nat  Nz Nart y Zero forman parte de 
+	[Nat]
+
+6. Variables
+	
+	El tipado en Maude es estático, por lo que la declaración de la variable debe estar relacionada con un sort en concreto.
+	
+	N:Nat declararía una variable con identificador N del sort Nat
+	N:[Nat] declararía una variable con identificador N del kind Nat
+	
+	Este tipo de declaración solo afecta al lugar donde es declarada; en cambio, si se utiliza la palabra clave "var" para declarar la variable, esta afectaría a todo el módulo. Ejemplos:
+	var N : Nat .
+	var X : [Nat] .
+	vars M N : nat .
+
+	fmod FACTORIAL is protecting NAT .  //Protecting: importar un módulo en modo protecting significa que no se le añade basura (definir nuevos términos irreducibles a los tipos definidos en el módulo importado) y confusión (agregar reglas de reducción que hacen que términos que eran distintos ahora no lo sean) cuando es importado.
+
+	op _! : Nat -> NzNat .
+	var N : Nat .
+	eq 0 ! = 1 . //eq permite escribir reglas de reescritura.
+	eq (s N) ! = (s N) * N ! .
+	endfm
