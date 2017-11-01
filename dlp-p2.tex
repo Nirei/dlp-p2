@@ -117,6 +117,7 @@ El resto del trabajo está estructurado como sigue. La sección~\ref{sec:alt-log
 
 \section{Lógicas alternativas}
 \label{sec:alt-logic}
+
 \subsection{Lógica proposicional}
 
 La lógica proposicional, o lógica de orden cero, es un sistema formal en el que sus elementos más simples son variables proposicionales cuyo ``significado'' no es importante, solo interesa su valor de verdad (\textquote{verdadero} o \textquote{falso}).
@@ -128,23 +129,23 @@ Las preposiciones están conectadas mediante conectivas lógicas que son tratada
 La lógica de predicados, o lógica de primer orden, aumenta la capacidad de expresión de la lógica proposicional. Un predicado es una expresión lingüística que puede conectarse con una o varias expresiones para formar una oración, pero para la lógica de predicados es una función que recibe expresiones como argumentos. La figura \ref{fig:predicados} muestra algunas oraciones en lenguaje natural y su correspondencia en lógica de predicados.
 
 \begin{figure}[h]
-\label{fig:predicados}
 \begin{itemize}
 \item \textquote{Claire es una gata} $ \to Gata(Claire) $
 \item \textquote{Juan juega con Lorena} $ \to Juega(Juan,Lorena) $
 \end{itemize}
 \caption{Ejemplos de predicados}
+\label{fig:predicados}
 \end{figure}
 
 Existen constantes de individuos que hacen referencia a entidades determinadas y variables de individuo que no tienen referencias determinadas; por tanto, su referencia varía con el contexto (figura \ref{fig:constantes}). Los cuantificadores son operadores sobre conjuntos de individuos que indican que una condición se verifica, por ejemplo: los cuantificadores universales y existenciales. Los predicados también pueden conectarse con las conectivas de la lógica proposicional.
 
 \begin{figure}[h]
-\label{fig:constantes}
 \begin{itemize}
 \item Rico(Juan)
 \item Rico(x)
 \end{itemize}
 \caption{Ejemplos de constantes y variables}
+\label{fig:constantes}
 \end{figure}
 
 \subsection{Lógica no monotónica}
@@ -165,9 +166,9 @@ El lenguaje de programación lógica más destacable es Prolog. Prolog fue cread
 El Prolog puro estaba originalmente restringido al uso de cierto tipo de fórmulas lógicas conocidas como cláusulas de Horn, esto es, implicaciones lógicas con un único consecuente.
 
 \begin{figure}[h]
-\label{fig:horn}
 {\Large{\[ ( p \land q \land r ) \to s \]}}%
 \caption{Cláusula de Horn en forma de implicación lógica. A la derecha encontramos una única variable.}
+\label{fig:horn}
 \end{figure}
 
 La particularidad de estas cláusulas es que expresan una relación de causalidad entre los antecedentes y el consecuente, permitiendo demostrar la veracidad lógica del consecuente si se verifica cada uno de los antecedentes. En el ejemplo de la figura~\ref{fig:horn} $ s $ se cumple si lo hacen $ p $, $ q $ y $r $.
@@ -175,7 +176,6 @@ La particularidad de estas cláusulas es que expresan una relación de causalida
 Programar en Prolog implica definir en primer lugar una base de hechos, que pueden ser átomos o proposiciones sobre estos, y reglas, las mencionadas cláusulas de Horn. Un átomo es un nombre definido en Prolog que no referencia ningún otro valor y sin significado propio, por ejemplo carlos, 'Pato' o 'universidade da Coruña'. Un ejemplo de una base de conocimiento se presenta en la figura~\ref{fig:knowledge}.
 
 \begin{figure}[h]
-\label{fig:knowledge}
 \lstset{language=Prolog}
 \begin{lstlisting}[frame=single]
 % atomo victor: victor existe
@@ -188,12 +188,12 @@ mojado :- llueve.
 arcoiris(X) :- lluvioso(X), soleado(X).	
 \end{lstlisting} 
 \caption{Definición de hechos atómicos, proposiciones y reglas en Prolog.}
+\label{fig:knowledge}
 \end{figure}
 
 Una vez definida esta base de conocimiento, es posible plantear cuestiones sobre la misma al intérprete de Prolog. Las figuras \ref{fig:basehechos} y \ref{fig:queries} presentan ejemplos de ejecución de consultas sobre una base de hechos de Prolog.
 
 \begin{figure}[p]
-\label{fig:basehechos}
 \lstset{language=Prolog}
 \begin{lstlisting}[frame=single]
 % base de hechos
@@ -231,10 +231,10 @@ abuelo(X,Y) :- hombre(X), abuelx(X,Y).
 abuela(X,Y) :- mujer(X), abuelx(X,Y).
 \end{lstlisting} 
 \caption{Definición de una base de hechos.}
+\label{fig:basehechos}
 \end{figure}
 
 \begin{figure}[p]
-\label{fig:queries}
 \lstset{language=Prolog}
 \begin{lstlisting}[frame=single]
 % query: quien es abuela de silvia?
@@ -258,6 +258,7 @@ query: que hijos varones tiene selena?
 Hijo = julian.
 \end{lstlisting} 
 \caption{Consultas sobre la base de hechos.}
+\label{fig:queries}
 \end{figure}
 
 \subsection{Unificación y backtracking}
@@ -279,7 +280,36 @@ lolol
 lol
 
 \subsection{Datalog}
-Datalog es un subconjunto de Prolog que se utiliza para consulta de bases de datos
+Datalog es un subconjunto del lenguaje Prolog empleado como lenguaje de consulta en bases de datos deductivas. A este efecto, Datalog restringe varias de las características de Prolog con el fin de explotar mejores algoritmos de evaluación de estas consultas.
+
+\begin{enumerate}
+\item Variables negadas en el cuerpo de una cláusula deben aparecer también sin negar en la propia cláusula.
+\item Cualquier variable en la cabeza de una cláusula debe figurar también, sin negar, en el cuerpo de la misma.
+\item Solo términos simples pueden aparecer como consecuente (cabecera) de una cláusula.
+\item No exite operador de corte para interrumpir la ejecución de una consulta en determinado punto.
+\end{enumerate}
+
+\begin{figure}[h]
+\lstset{language=Prolog}
+\begin{lstlisting}[frame=single]
+% permitido en datalog
+p(a) :- q(a), not r(a).
+p(a, b, c) :- q(a), r(b), s(c).
+p (a, b).
+
+% prohibido en datalog
+p(a) :- not r(a).		% restriccion 1
+p(a, b, c) :- r(b), s(c).	% restriccion 2
+r(p(a, b), q(a, b)).		% restriccion 3
+
+\end{lstlisting} 
+\caption{Restricciones de Datalog ejemplificadas.}
+\label{fig:restriccionesdatalog}
+\end{figure}
+
+Debido a estas restricciones Datalog no es Turing-completo, pero sí es puramente declarativo. La ausencia de un operador de corte, junto con la independencia del orden de declaración de las cláusulas, tiene como consecuencia la completa abstracción del control de flujo en la ejecución de consultas de Datalog. Otra propiedad interesante derivada de las restricciones de Datalog es que la ejecución siempre se puede realizar de forma bidireccional.
+
+Datalog goza de cierta popularidad a día de hoy. Existen proyectos, tanto de software libre como comercial/privativo, que lo utilizan como lenguaje para numerosas tareas relacionadas con la consulta de bases de conocimiento. Entre los más reseñables encontramos Datomic, una base de datos transaccional y distribuída construída sobre Clojure y Datalog; SociaLite, un dialecto de Datalog de alto rendimiento para análisis de grafos en minería de datos diseñado en la universidad de Stanford; SecPAL, un lenguaje de políticas de seguridad de Microsoft Research y una amplia gama de dialectos con diferentes adiciones al lenguaje original.
 
 \subsection{Clingo}
 lol
