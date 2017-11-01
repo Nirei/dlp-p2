@@ -57,7 +57,8 @@ Sintaxis:
 	var X : [Nat] .
 	vars M N : nat .
 
-	fmod FACTORIAL is protecting NAT .  //Protecting: importar un módulo en modo protecting significa que no se le añade basura (definir nuevos términos irreducibles a los tipos definidos en el módulo importado) y confusión (agregar reglas de reducción que hacen que términos que eran distintos ahora no lo sean) cuando es importado.
+	fmod FACTORIAL is 
+	protecting NAT .  //Protecting: importar un módulo en modo protecting significa que no se le añade basura (definir nuevos términos irreducibles a los tipos definidos en el módulo importado) y confusión (agregar reglas de reducción que hacen que términos que eran distintos ahora no lo sean) cuando es importado.
 
 	op _! : Nat -> NzNat .
 	var N : Nat .
