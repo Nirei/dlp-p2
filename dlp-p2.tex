@@ -70,6 +70,9 @@
 \usepackage{qtree}
 \usepackage{hyperref}
 \usepackage[spanish]{babel}
+\usepackage{csquotes}
+
+\setlist[itemize]{label={$\bullet$}}
 
 \newcommand{\vctilde}{\raisebox{0.5ex}{\texttildelow}}
 
@@ -110,31 +113,47 @@ La programación lógica abarca varios tipos de lógicas, útiles en diferentes 
 
 Los lenguajes elegidos en este trabajo para ejemplificar los diferentes usos de la programación lógica serán Prolog, para el caso más general, Datalog, como ejemplo de un lenguaje orientado a la consulta de bases de conocimientos, Maude system como ejemplo de sistema de reescritura y Clingo para el enfoque de programación de conjunto-respuesta (answer set programming).
 
-El resto del trabajo está estructurado como sigue. La sección \ref{sec:alt-logic} es una brevísima introducción a la lógica matemática y algunas lógicas alternativas a la usual lógica de predicados, que incorporan artefactos adecuados para el razonamiento en dominios en los que la lógica estándar se queda corta. En la sección \ref{sec:prolog} introducimos el lenguaje Prolog, diseccionando su funcionamiento y características y comentando por encima algunas extensiones populares. Finalmente, la sección \ref{sec:alt-prolog} comenta varios lenguajes de programación lógica alternativos orientados a distintos dominios.
+El resto del trabajo está estructurado como sigue. La sección~\ref{sec:alt-logic} es una brevísima introducción a la lógica matemática y algunas lógicas alternativas a la usual lógica de predicados, que incorporan artefactos adecuados para el razonamiento en dominios en los que la lógica estándar se queda corta. En la sección~\ref{sec:prolog} introducimos el lenguaje Prolog, diseccionando su funcionamiento y características y comentando por encima algunas extensiones populares. La sección~\ref{sec:alt-prolog} comenta varios lenguajes de programación lógica alternativos orientados a distintos dominios y finalmente, la sección~\ref{sec:domains} examina los dominios de aplicación más frecuentes para la programación lógica y presenta algunos ejemplos de casos de uso reales desarrollados en este paradigma.
 
 \section{Lógicas alternativas}
 \label{sec:alt-logic}
 \subsection{Lógica proposicional}
 
-	La lógica proposicional, o lógica de orden cero, es un sistema formal en el que sus elementos más simples son variables proposicionales cuyo ``significado´´ no es importante, solo interesa su valor de verdad («verdadero» o «falso»).
+La lógica proposicional, o lógica de orden cero, es un sistema formal en el que sus elementos más simples son variables proposicionales cuyo ``significado'' no es importante, solo interesa su valor de verdad (\textquote{verdadero} o \textquote{falso}).
 
-	Las preposiciones están conectadas mediante conectivas lógicas que son tratadas como funciones de verdad; es decir, como funciones que toman conjuntos de valores de verdad y devuelven, también, valores de verdad. Por ejemplo, la conectiva «y» es una función que devolverá «verdadero» cuando tome dos valores de verdad verdaderos y, en el resto de casos, devolverá «falso». La diferencia entre los distintos conectores lógicos es el valor de verdad devuelto según las combinaciones de valores que recibe.
+Las preposiciones están conectadas mediante conectivas lógicas que son tratadas como funciones de verdad; es decir, como funciones que toman conjuntos de valores de verdad y devuelven, también, valores de verdad. Por ejemplo, la conectiva \textquote{y} es una función que devolverá \textquote{verdadero} cuando tome dos valores de verdad verdaderos y, en el resto de casos, devolverá \textquote{falso}. La diferencia entre los distintos conectores lógicos es el valor de verdad devuelto según las combinaciones de valores que recibe.
 
 \subsection{Lógica de predicados}
 
-	La lógica de predicados, o lógica de primer orden, aumenta la capacidad de expresión de la lógica proposicional. Un predicado es una expresión lingüística que puede conectarse con una o varias expresiones para formar una oración, pero para la lógica de predicados es una función que recibe expresiones como argumentos. Ejemplos:
-«Claire es una gata» ----> Gata(Claire)
-«Juan juega con Lorena» -> Juega(Juan,Lorena)
+La lógica de predicados, o lógica de primer orden, aumenta la capacidad de expresión de la lógica proposicional. Un predicado es una expresión lingüística que puede conectarse con una o varias expresiones para formar una oración, pero para la lógica de predicados es una función que recibe expresiones como argumentos. La figura \ref{fig:predicados} muestra algunas oraciones en lenguaje natural y su correspondencia en lógica de predicados.
 
-	Existen constantes de individuos que hacen referencia a entidades determinadas y variables de individuo que no tienen referencias determinadas; por tanto, su referencia varía con el contexto. Ejemplo: Rico(Juan), Rico(x). Los cuantificadores son operadores sobre conjuntos de individuos que indican que una condición se verifica, por ejemplo: los cuantificadores universales y existenciales. Los predicados también pueden conectarse con las conectivas de la lógica proposicional.
+\begin{figure}[h]
+\label{fig:predicados}
+\begin{itemize}
+\item \textquote{Claire es una gata} $ \to Gata(Claire) $
+\item \textquote{Juan juega con Lorena} $ \to Juega(Juan,Lorena) $
+\end{itemize}
+\caption{Ejemplos de predicados}
+\end{figure}
+
+Existen constantes de individuos que hacen referencia a entidades determinadas y variables de individuo que no tienen referencias determinadas; por tanto, su referencia varía con el contexto (figura \ref{fig:constantes}). Los cuantificadores son operadores sobre conjuntos de individuos que indican que una condición se verifica, por ejemplo: los cuantificadores universales y existenciales. Los predicados también pueden conectarse con las conectivas de la lógica proposicional.
+
+\begin{figure}[h]
+\label{fig:constantes}
+\begin{itemize}
+\item Rico(Juan)
+\item Rico(x)
+\end{itemize}
+\caption{Ejemplos de constantes y variables}
+\end{figure}
 
 \subsection{Lógica no monotónica}
 
-	Los sistemas lógicos tradicionales tienen una relación de consecuencia monotónica; es decir, las nuevas fórmulas añadidas a una teoría no reducen el número de consecuencias (lo conocido no se ve modificado por el nuevo conocimiento). Esto impide trabajar con razonamientos por incertidumbre, probabilidad o la contradicción de creencias. La lógica no monotónica permite trabajar con estos criterios, ya que el nuevo conocimiento puede contradecir al viejo y, por tanto, reducirlo. Esto permite suponer hechos y modifcarlos cuando se tiene el conocimiento.
+Los sistemas lógicos tradicionales tienen una relación de consecuencia monotónica; es decir, las nuevas fórmulas añadidas a una teoría no reducen el número de consecuencias (lo conocido no se ve modificado por el nuevo conocimiento). Esto impide trabajar con razonamientos por incertidumbre, probabilidad o la contradicción de creencias. La lógica no monotónica permite trabajar con estos criterios, ya que el nuevo conocimiento puede contradecir al viejo y, por tanto, reducirlo. Esto permite suponer hechos y modifcarlos cuando se tiene el conocimiento.
 
 \subsection{Lógica modal}
 
-	La lógica modal añade las expresiones «es necesario que» y «es posible que» a la lógica de predicados. Estas expresiones califican la verdad de los juicios. Extensiones de la lógica modal añaden nuevas expresiones para calificar, como la lógica temporal, en la que el valor de la verdad de las expresiones es dependiente del tiempo; o la deóntica, que agrega la lógica de las normas.
+La lógica modal añade las expresiones «es necesario que» y «es posible que» a la lógica de predicados. Estas expresiones califican la verdad de los juicios. Extensiones de la lógica modal añaden nuevas expresiones para calificar, como la lógica temporal, en la que el valor de la verdad de las expresiones es dependiente del tiempo; o la deóntica, que agrega la lógica de las normas.
 
 \section{Prolog}
 \label{sec:prolog}
@@ -159,26 +178,87 @@ Programar en Prolog implica definir en primer lugar una base de hechos, que pued
 \label{fig:knowledge}
 \lstset{language=Prolog}
 \begin{lstlisting}[frame=single]
-lol.
-wtf(lol).
-rofl :- lol.
-lmao(X) :- funny(X), wtf(lol).
+% atomo victor: victor existe
+victor.
+% victor es alto
+alto(victor).
+% si llueve (antecedente), esta mojado (consecuente)
+mojado :- llueve.
+% si el dia X es lluvioso y soleado, habra arcoiris
+arcoiris(X) :- lluvioso(X), soleado(X).	
 \end{lstlisting} 
 \caption{Definición de hechos atómicos, proposiciones y reglas en Prolog.}
 \end{figure}
 
-Una vez definida esta base de conocimiento, es posible plantear cuestiones sobre la misma al intérprete de Prolog. La figura~\ref{xddd} presenta un ejemplo de ejecución de una consulta sobre una base de hechos de Prolog.
+Una vez definida esta base de conocimiento, es posible plantear cuestiones sobre la misma al intérprete de Prolog. Las figuras \ref{fig:basehechos} y \ref{fig:queries} presentan ejemplos de ejecución de consultas sobre una base de hechos de Prolog.
 
-\begin{figure}[h]
-\label{fig:xddd}
+\begin{figure}[p]
+\label{fig:basehechos}
 \lstset{language=Prolog}
 \begin{lstlisting}[frame=single]
-otra.
-cosa.
+% base de hechos
+
+% mujeres
+mujer(sara).
+mujer(selena).
+mujer(silvia).
+mujer(sonia).
+mujer(susana).
+
+% varones
+hombre(jaime).
+hombre(jeronimo).
+hombre(jimeno).
+hombre(jorge).
+hombre(julian).
+
+% parentescos explicitos: padres(hijo, progenitor1, progenitor2)
+padres(susana, jaime, sara).
+padres(julian, jeronimo, selena).
+padres(silvia, julian, susana).
+padres(jimeno, jorge, sonia).
+
+% parentescos derivados (logicamente deductibles)
+hija(X,Y) :- mujer(X), padres(X,Y,_).
+hija(X,Y) :- mujer(X), padres(X,_,Y).
+hijo(X,Y) :- hombre(X), padres(X,Y,_).
+hijo(X,Y) :- hombre(X), padres(X,_,Y).
+abuelx(X,Z) :- padres(Z,Y,_), padres(Y,X,_).
+abuelx(X,Z) :- padres(Z,_,Y), padres(Y,X,_).
+abuelx(X,Z) :- padres(Z,Y,_), padres(Y,_,X).
+abuelx(X,Z) :- padres(Z,_,Y), padres(Y,_,X).
+abuelo(X,Y) :- hombre(X), abuelx(X,Y).
+abuela(X,Y) :- mujer(X), abuelx(X,Y).
 \end{lstlisting} 
-\caption{Blablabla.}
+\caption{Definición de una base de hechos.}
 \end{figure}
 
+\begin{figure}[p]
+\label{fig:queries}
+\lstset{language=Prolog}
+\begin{lstlisting}[frame=single]
+% query: quien es abuela de silvia?
+?- abuela(Abuela, silvia).
+Abuela = sara ;
+Abuela = selena ;
+false.
+
+% query: es jimeno hijo de susana?
+?- hijo(jimeno, susana).
+false.
+
+% query: de quien es hijo jimeno?
+?- hijo(jimeno, Progenitor).
+Progenitor = jorge ;
+Progenitor = sonia ;
+false.
+
+query: que hijos varones tiene selena?
+?- hijo(Hijo, selena).
+Hijo = julian.
+\end{lstlisting} 
+\caption{Consultas sobre la base de hechos.}
+\end{figure}
 
 \subsection{Unificación y backtracking}
 

@@ -1,16 +1,33 @@
-factorial(0,Result) :-
-	Result is 1.
-factorial(N,Result) :-
-	N > 0,
-	N1 is N-1,
-	factorial(N1,Result1),
-	Result is Result1*N.
+% base de hechos
 
-esHijo(juan,javier).
-esHijo(luis,javier).
-esHijo(pedro,manuel).
-esHijo(jorge,manuel).
+% mujeres
+mujer(sara).
+mujer(selena).
+mujer(silvia).
+mujer(sonia).
+mujer(susana).
 
+% varones
+hombre(jaime).
+hombre(jeronimo).
+hombre(jimeno).
+hombre(jorge).
+hombre(julian).
 
-haceSol.
+% parentescos explícitos: padres(hijo, progenitor1, progenitor2)
+padres(susana, jaime, sara).
+padres(julian, jeronimo, selena).
+padres(silvia, julian, susana).
+padres(jimeno, jorge, sonia).
 
+% parentescos derivados (logicamente deductibles)
+hija(X,Y) :- mujer(X), padres(X,Y,_).
+hija(X,Y) :- mujer(X), padres(X,_,Y).
+hijo(X,Y) :- hombre(X), padres(X,Y,_).
+hijo(X,Y) :- hombre(X), padres(X,_,Y).
+abuelx(X,Z) :- padres(Z,Y,_), padres(Y,X,_).
+abuelx(X,Z) :- padres(Z,_,Y), padres(Y,X,_).
+abuelx(X,Z) :- padres(Z,Y,_), padres(Y,_,X).
+abuelx(X,Z) :- padres(Z,_,Y), padres(Y,_,X).
+abuelo(X,Y) :- hombre(X), abuelx(X,Y).
+abuela(X,Y) :- mujer(X), abuelx(X,Y).
