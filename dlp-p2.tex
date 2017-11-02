@@ -69,7 +69,7 @@
 
 \usepackage{listings}
 \usepackage{qtree}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage[spanish]{babel}
 \usepackage{csquotes}
 \usepackage[section]{placeins}
@@ -85,13 +85,8 @@
 	\and Bouzas Quiroga, Jacobo\\
 	\texttt{jacobo.bouzas.quiroga@udc.es}}
 
-\makeatletter
-\@ifpackagelater{scrbase}{2014/12/12}{}{\def\scr@startsection{\@startsection}}
-\makeatother
-
 % fecha
-\newdate{release}{26}{10}{2017}
-\date{\displaydate{release}}
+\date{\today}
 
 %%% The "real" document content comes below...
 \begin{document}
@@ -424,7 +419,7 @@ Clingo requiere dos especificaciones para funcionar. Por un lado una base de hec
 % Define : propiedades auxiliares de una solucion candidata
 move(D,T) :- move(D,_,T).
 on(D,P,0) :- init_on(D,P).
-6 on(D,P,T) :- move(D,P,T).
+on(D,P,T) :- move(D,P,T).
 on(D,P,T+1) :- on(D,P,T), not move(D,T+1), not moves(T).
 blocked(D-1,P,T+1) :- on(D,P,T), not moves(T).
 blocked(D-1,P,T) :- blocked(D,P,T), disk(D).
