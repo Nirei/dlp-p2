@@ -78,15 +78,15 @@
 
 \newcommand{\vctilde}{\raisebox{0.5ex}{\texttildelow}}
 
-\title{Deseño de Linguaxes de Programación}
-\subtitle{Programación Lógica}
-\author{Rodríguez Arias, Alejandro\\
-	\texttt{alejandro.rodriguez.arias@udc.es}
-	\and Bouzas Quiroga, Jacobo\\
-	\texttt{jacobo.bouzas.quiroga@udc.es}}
+\title{Programación Lógica}
+\subtitle{Deseño de Linguaxes de Programación}
+\author{\small Rodríguez Arias, Alejandro\\
+	\small \texttt{alejandro.rodriguez.arias@udc.es}
+	\and \small Bouzas Quiroga, Jacobo\\
+	\small \texttt{jacobo.bouzas.quiroga@udc.es}}
 
 % fecha
-\date{\today}
+\date{\small \today}
 
 %%% The "real" document content comes below...
 \begin{document}
@@ -253,7 +253,6 @@ Hijo = julian.
 \end{figure}
 
 \subsection{Unificación y backtracking}
-
 La ejecución de código en Prolog se guía por dos mecanismos, la unificación y el backtracking. Mediante la unificación de una cláusula se determinan los objetivos, las condiciones que forman el antecedente. Cada objetivo especifica un conjunto de cláusulas que podrían verificarlo, estas cláusulas se denominan puntos de elección. Si, tras su ejecución, uno de los puntos de elección prueba ser falso, se deshace la ejecución y se selecciona el siguiente punto de elección. Este proceso, denominado backtracking, se repite hasta que una de estas cláusulas resulte ser cierta o todos los puntos de elección resultan falsos.
 
 \subsection{Prolog como lenguaje de programación}
@@ -268,7 +267,6 @@ A nivel de estructuras de datos, Prolog introduce listas recursivas, a la manera
 Otros lenguajes ofrecen distintos enfoques para la programación lógica pero se basan aproximadamente en los mismos principios básicos que Prolog. No son infrecuentes versiones relajadas o restringidas de Prolog y extensiones al propio lenguaje con \textit{syntactic sugar} destinado a facilitar el uso de uno u otro tipo de lógica. A continuación examinamos algunos lenguajes de mérito propio así como extensiones de Prolog de interés.
 
 \subsection{Maude System}
-
 Maude es un lenguaje de programación lógica de propósito general y software libre desarrollado por el SRI International: un instituto de investigacion de California. Provee un compilador conocido como Core Maude. Maude es un lenguaje de alto rendimiento que utiliza lógica ecuacional y de rescritura y un sistema de tipado estático. Gracias a la lógica de reescritura Maude es naturalmente reflexivo, haciendo sencillo implementar diferentes tipos de lógica con los artefactos del lenguaje.
 
 \begin{figure}[!htbp]
@@ -442,7 +440,7 @@ Guardando el código de los archivos con extensión \texttt{.pl} e introduciénd
 \begin{figure}[!htbp]
 \begin{lstlisting}[frame=single]
 clingo version 4.4.0
-Reading from toh_ins.lp ...
+Reading from input.lp ...
 Solving...
 Answer: 1
 move(4,b,1) move(3,c,2) move(4,c,3) move(2,b,4) \
@@ -467,7 +465,11 @@ Clingo añade sintaxis y funcionalidades apropiadas para resolver problemas comb
 Si bien los lenguajes de programación lógica no son de uso común en proyectos de ingeniería de software y están más vinculados a la investigación y la academia, en algunos campos las particularidades de estos lenguajes los convierten en idóneos para resolver problemas. A continuación se describen algunos de estos dominios de aplicación.
 
 \subsection{Procesamiento de lenguaje natural}
-El primero de ellos, el procesamiento del lenguaje natural, es un campo de las ciencias de la computación, inteligencia artificial y lingüística que estudia las interacciones entre las computadoras y el lenguaje humano. Se ocupa de la formulación e investigación de mecanismos computacionalmente eficaces para la comunicación entre personas y máquinas por medio de la lengua hablada o escrita. Como ejemplo tenemos Clarissa, un navegador de procedimientos aeroespaciales completamente operado por voz que permite a los astronautas ser más eficientes con sus manos y ojos y prestar toda su atención a las tareas concretas mientras interactúan con la el sistema mediante el lenguaje hablado. Clarissa ha sido desarrollado en Prolog por la NASA.
+El primero de ellos, el procesamiento del lenguaje natural, es un campo de las ciencias de la computación, inteligencia artificial y lingüística que estudia las interacciones entre las computadoras y el lenguaje humano. Se ocupa de la formulación e investigación de mecanismos computacionalmente eficaces para la comunicación entre personas y máquinas por medio de la lengua hablada o escrita.
+
+Existe una fuerte simbiosis entre este área de la computación y la programación lógica. En muchos marcos lingüisticos, el conocimiento sobre el lenguaje se expresa como algún tipo de deducción sobre una serie de principios generales que pueden ser expresados como axiomas (por ejemplo, en una gramática). La información parcial e incremental también es típica en la lingüistica y puede ser expresada a traves de variables lógicas. Algunos aspectos de la lógica juegan un papel importante en la lingüistica y el procesamiento de lenguaje natural. Al elegir un formalismo basado en la lógica para procesar el lenguaje, los medios de implementación se acercan más a las representaciones manipuladas en su procesamiento.
+
+Como ejemplo tenemos Clarissa, un navegador de procedimientos aeroespaciales completamente operado por voz que permite a los astronautas ser más eficientes con sus manos y ojos y prestar toda su atención a las tareas concretas mientras interactúan con la el sistema mediante el lenguaje hablado. Clarissa ha sido desarrollado en Prolog por la NASA.
 
 \subsection{Demostración automática, verificación formal y programación concurrente}
 Los lenguajes lógicos también son útiles en la demostración automatizada de teoremas, permitiendo una expresión de los mismos cercana a su formulación matemática. La verificación formal del software, basada en el uso de la lógica para proporcionar una demostración de que el programa realiza la tarea esperada sin posibilidad de error, y la programación concurrente, debido al aspecto declarativo de la programación lógica; son otros dos importantes campos de aplicación. El autor de Erlang escribió el primer intérprete de su lenguaje utilizando Prolog.
