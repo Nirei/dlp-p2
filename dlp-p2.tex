@@ -105,15 +105,16 @@
 
 El presente trabajo tratará de ofrecer una aproximación al paradigma de la programación lógica y los diferentes lenguajes de programación que se encuadran en él, dando una perspectiva de las particularidades de este tipo de lenguajes respecto a los de otros paradigmas y ofreciendo una visión comparativa de las características propias de cada uno de los lenguajes estudiados.
 
-La programación lógica, en su forma actual, surje alrededor de la década de los 70 en el marco del debate entre representaciones procedurales y declarativas del conocimiento en Inteligencia Artificial. La programación lógica se basa en la lógica formal.
+La programación lógica, en su forma actual, surge alrededor de la década de los 70 en el marco del debate entre representaciones procedurales y declarativas del conocimiento en Inteligencia Artificial. La programación lógica se basa en la lógica formal.
 
-Un programa en este paradigma se expresa como una serie de hechos y reglas que representan las relaciones entre ellos. De este modo, al escribir un algoritmo en estos lenguajes, no es necesario expresar el componente de control. El flujo del programa, el orden en que se ejecutan las instrucciones, se decidirá de forma automática y por tanto, la programación lógica es un subconjunto del paradigma de la programación declarativa.
+Un programa en este paradigma se expresa como una serie de hechos y reglas que representan las relaciones entre ellos. De este modo, al escribir un algoritmo de estos lenguajes, no es necesario expresar el componente de control. El flujo del programa, el orden en que se ejecutan las instrucciones, se decidirá de forma automática y por tanto, la programación lógica es un subconjunto del paradigma de la programación declarativa.
 
 La expresión de programas como una serie de cláusulas lógicas encuentra su utilidad fundamental en varios dominios en los que la lógica se presenta como la expresión natural de los problemas a abordar. Algunos de estos dominios son el razonamiento automático, tanto para la demostración automática de teoremas y la verificación formal como para la construcción de sistemas expertos; o el reconocimiento del lenguaje natural.
 
 La programación lógica abarca varios tipos de lógicas, útiles en diferentes tipos de problemas. Además de la lógica proposicional y de primer orden, existen implementaciones de lógica difusa y lógica modal, como la temporal, para trabajar con la ambigüedad semántica propia de los lenguajes humanos o lógicas no monotónicas, para razonar bajo incertidumbre o información incompleta.
 
-Los lenguajes elegidos en este trabajo para ejemplificar los diferentes usos de la programación lógica serán Prolog, para el caso más general, Datalog, como ejemplo de un lenguaje orientado a la consulta de bases de conocimientos, Maude system como ejemplo de sistema de reescritura y Clingo para el enfoque de programación de conjunto-respuesta (answer set programming).
+Los lenguajes elegidos en este trabajo para ejemplificar los diferentes usos de la programación lógica serán Prolog, para el caso más general, Datalog, como ejemplo de un lenguaje orientado a la consulta de bases de conocimientos, Maude system como ejemplo de sistema de reescritura y Clingo para el enfoque de programación de conjunto-respuesta (\textit{answer set programming}).
+% y MProlog, una extensión de Prolog que implementa lógica modal.
 
 El resto del trabajo está estructurado como sigue. La sección~\ref{sec:alt-logic} es una brevísima introducción a la lógica matemática y algunas lógicas alternativas a la usual lógica de predicados, que incorporan artefactos adecuados para el razonamiento en dominios en los que la lógica estándar se queda corta. En la sección~\ref{sec:prolog} introducimos el lenguaje Prolog, diseccionando su funcionamiento y características y comentando por encima algunas extensiones populares. La sección~\ref{sec:alt-prolog} comenta varios lenguajes de programación lógica alternativos orientados a distintos dominios y finalmente, la sección~\ref{sec:dominios} examina los dominios de aplicación más frecuentes para la programación lógica y presenta algunos ejemplos de casos de uso reales desarrollados en este paradigma.
 
@@ -396,8 +397,75 @@ Debido a estas restricciones Datalog no es Turing-completo, pero sí es purament
 
 Datalog goza de cierta popularidad a día de hoy. Existen proyectos, tanto de software libre como comercial/privativo, que lo utilizan como lenguaje para numerosas tareas relacionadas con la consulta de bases de conocimiento. Entre los más reseñables encontramos Datomic, una base de datos transaccional y distribuída construída sobre Clojure y Datalog; SociaLite, un dialecto de Datalog de alto rendimiento para análisis de grafos en minería de datos diseñado en la universidad de Stanford; SecPAL, un lenguaje de políticas de seguridad de Microsoft Research y una amplia gama de dialectos con diferentes adiciones al lenguaje original.
 
-\subsection{FUCK Clingo}
-lolwut
+\subsection{Clingo}
+Clingo, es un lenguaje y herramienta de la suite Potassco, Postdam Answer Set Solving Collection, desarrollada por la universidad de Postdam. Integra un \textit{grounder}, software que toma conjuntos de expresiones en lógica de predicados y las traslada a la lógica proposicional, eliminando las variables; y un \textit{solver}, que calcula los conjuntos respuesta que satisfacen las proposiciones ofrecidas por el grounder basándose en una técnica conocida como \textit{answer set programming}. La sintaxis de Clingo se basa en la de Prolog. A continuación veremos cómo resolver un problema en Clingo.
+
+\begin{figure}[!htbp]
+\lstset{language=Prolog}
+\begin{lstlisting}[frame=single]
+peg(a;b;c).		% valores aceptables para las varas
+disk(1..4).		% valores aceptables para los discos
+init_on(1..4,a).	% estado inicial del problema
+goal_on(1..4,c).	% estado final
+moves(15).		% numero maximo de movimientos
+\end{lstlisting} 
+\caption{Instancia (\textit{instance}) del problema de las Torres de Hanoi en Clingo.}
+\label{fig:clingoins}
+\end{figure}
+
+Clingo requiere dos especificaciones para funcionar. Por un lado una base de hechos que describa el estado inicial del problema a resolver, conocida como instancia. Se muestra la instancia del estado inicial de las torres de Hanoi permitiendo 15 movimientos en la figura~\ref{fig:clingoins}. Por otro, y en un archivo independiente, la especificación del problema en la forma de reglas que permiten navegar el espacio de estados, llamada codificación. Para el mismo problema, las torres de Hanoi, se muestra su codificación en la figura~\ref{fig:clingoenc}.
+
+\begin{figure}[!htbp]
+\lstset{language=Prolog}
+\begin{lstlisting}[frame=single]
+% Generate : descripcion de soluciones candidatas
+{ move(D,P,T) : disk(D), peg(P) } = 1 :- moves(M), T = 1..M.
+
+% Define : propiedades auxiliares de una solucion candidata
+move(D,T) :- move(D,_,T).
+on(D,P,0) :- init_on(D,P).
+6 on(D,P,T) :- move(D,P,T).
+on(D,P,T+1) :- on(D,P,T), not move(D,T+1), not moves(T).
+blocked(D-1,P,T+1) :- on(D,P,T), not moves(T).
+blocked(D-1,P,T) :- blocked(D,P,T), disk(D).
+
+% Test : reglas para verificar la validez de una s. candidata
+:- move(D,P,T), blocked(D-1,P,T).
+:- move(D,T), on(D,P,T-1), blocked(D,P,T).
+:- goal_on(D,P), not on(D,P,M), moves(M).
+:- { on(D,P,T) } != 1, disk(D), moves(M), T = 1..M.
+
+% Display : predicados que interesa mostrar a la salida
+#show move/3.
+\end{lstlisting} 
+\caption{Codificación (\textit{encoding}) del problema de las Torres de Hanoi en Clingo.}
+\label{fig:clingoenc}
+\end{figure}
+
+Guardando el código de los archivos con extensión \texttt{.pl} e introduciéndolos en clingo para su procesamiento obtenemos el contenido de la figura~\ref{fig:clingosol}. Para obtener este resultado Clingo trabaja generando soluciones plausibles mediante la descripción del bloque \textit{generate} y contrastando su validez con los predicados decapitados del bloque \textit{test}, en los que el consecuente suprimido sería la solución candidata que se está probando. De este modo es posible realizar una exploración del espacio de estados hasta alcanzar uno o más modelos que satisfaga las restricciones del problema.
+
+\begin{figure}[!htbp]
+\begin{lstlisting}[frame=single]
+clingo version 4.4.0
+Reading from toh_ins.lp ...
+Solving...
+Answer: 1
+move(4,b,1) move(3,c,2) move(4,c,3) move(2,b,4) \
+move(4,a,5) move(3,b,6) move(4,b,7) move(1,c,8) \
+move(4,c,9) move(3,a,10) move(4,a,11) move(2,c,12) \
+move(4,b,13) move(3,c,14) move(4,c,15)
+SATISFIABLE
+
+Models : 1+
+Calls : 1
+Time : 0.017s (Solving: 0.01s 1st Model: 0.01s \ Unsat: 0.00s)
+CPU Time : 0.010s
+\end{lstlisting} 
+\caption{Solución proporcionada por Clingo al problema de las torres de Hanoi.}
+\label{fig:clingosol}
+\end{figure}
+
+Clingo añade sintaxis y funcionalidades apropiadas para resolver problemas combinatorios complejos. Incluye, por ejemplo, un modo de especificar heurísticas para guiar la exploración del espacio de soluciones candidatas; la posibilidad de definir reglas con consecuentes disyuntivos, que permiten trabajar en situaciones en las que existen dependencias cíclicas entre proposiciones y muchos otros constructos útiles.
 
 \section{Dominios de aplicación}
 \label{sec:dominios}
